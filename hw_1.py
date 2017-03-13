@@ -65,6 +65,7 @@ def on_error(ws, error):
     print("Error: " + error)
 
 def on_close(ws):
+    print("### closed ###")
     f = open('data.json', 'a')
     f.write(relationTypes)
     f.write(nodeTypes)  
