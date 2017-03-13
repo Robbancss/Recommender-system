@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<meta charset="utf-8"/>
+<title>WebSocket</title>
+<script language="javascript" type="text/javascript">
+
+var ws = new WebSocket("ws://service.recommender-system.com/recsys2-course/engine");
+
+ws.onopen = function(e){
+	console.log("CONNECTED");
+}
+
+ws.onclose = function(e){
+	console.log("DISCONNECTED");
+}
+
+ws.onmessage = function(e){
+	console.log("Ws: " + e.data);
+	if(e.data == "Author name") {
+		ws.send("Author name: Pánczél Róbert");
+	}
+	else if(e.data == "Author email") {
+		ws.send("Author email: robi.panczel@gmail.com");
+	}
+	else if(e.data == "Author id") {
+		ws.send("Author id: EY2P3W");
+	}
+}
+
+ws.onerror = function(e){
+	console.log("ERROR: " + e.data);
+}
+
+</script>
+
+<h2>WebSocket</h2>
