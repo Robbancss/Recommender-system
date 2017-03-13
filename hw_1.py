@@ -2,8 +2,8 @@ import websocket
 import _thread
 import json
 
-nt = []
-rt = []
+nodeType = []
+relationType = []
 
 def on_message(ws, message):
     print("Message: %s" % message)
@@ -25,35 +25,35 @@ def on_message(ws, message):
     elif message == "Add node type:":
             nodetype = message[14:].lstrip(' ')
             print("... Adding node type: " + nodetype)
-            nt.append(nodetype)
+            nodeType.append(nodetype)
             #ws.send("Node type added:" + nodetype)
             print("Sent: Node type added: " + nodetype)
             
     elif message == "Add relation type:":
             reltype = message[18:].lstrip(' ')
             print("... Adding relation type: " + reltype)
-            rt.append(reltype)
+            relationType.append(reltype)
             #ws.send("Relation type added:" + reltype)
             print("Sent: Relation type added: " + reltype)
             
     elif message == "Get node types":
             print("... Sending: " + message)
-            #ws.send("Node types:" + json.dumps(nt))
+            #ws.send("Node types:" + json.dumps(nodeType))
             print("Sent: ")
-            print(nt)
+            print(nodeType)
             
     elif message == "Get relation types":
             print("... Sending: " + message)
-            #ws.send("Relation types:" + json.dumps(rt))
+            #ws.send("Relation types:" + json.dumps(relationType))
             print("Sent: ")
-            print(rt)
+            print(relationType)
             
     else:
             print("... Custom message: " + message)
-            nt.append(message)
-            ws.send(json.dumps(nt))
+            nodeType.append(message)
+            ws.send(json.dumps(nodeType))
             print("Sent in JSON: ")
-            print(json.dumps(nt))
+            print(json.dumps(nodeType))
             ws.close()
 
 def on_error(ws, error):
@@ -64,7 +64,7 @@ def on_close(ws):
 
 def on_open(ws):
     def run(*args):
-        ws.send("Hello")
+        ws.send("Handsake")
     _thread.start_new_thread(run, ())
 
 
