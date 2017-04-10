@@ -1,11 +1,12 @@
 import json
 import _thread
 import websocket
+import re
 
 nodeTypes = []
-nodeCount = []
 relationTypes = []
-relationCount = []
+nodeCount = 0
+relationCount = 0
 
 
 def on_message(ws, message):
@@ -71,49 +72,51 @@ def on_message(ws, message):
         ws.send("Knowledge base has been created")
         print("Sent Knowledge base has been created")
 
+        
+
     # Add node
     elif message[:9] == "Add node:":
         print("..Sending:", message)
         newNode = message[9:]
         fajl = open('node_type.json', 'a')
         fajl.writelines(json.dumps(newNode))
-        fajl.close()
+        # fajl.close()
         ws.send("Node added")
-        nodeCount.append('1')
+        nodeCount.__add__(1)
 
     # Add relation
     elif message[:13] == "Add relation:":
         print("..Sending:", message)
-        newRelation = message[:13]
+        newRelation = message[13:]
         fajl = open('relation_type.json', 'a')
         fajl.write(json.dumps(newRelation))
-        fajl.close()
+        # fajl.close()
         ws.send("Relation added")
-        relationCount.append('2')
+        relationCount.__add__(1)
 
     # Get Node Count
     elif message == "Get node count":
         print("..Sending Node Count")
         fajl = open('data.json', 'a')
-        a = str(len(nodeCount))
-        fajl.write(json.dumps(['Node count:', a]))
-        fajl.close()
-        ws.send("Node count:", nodeCount)
+        a = str(nodeCount)
+        fajl.write(json.dumps(['Node count:', nodeCount]))
+        # fajl.close()
+        ws.send("Node count:", a)
 
     # Get relation Count
     elif message == "Get relation count":
         print("..Sending relation count")
         fajl = open('data.json', 'a')
-        a = str(len(relationCount))
-        fajl.write(json.dumps(['Relation count:', a]))
-        fajl.close()
-        ws.send("Relation count:", relationCount)
+        a = str(relationCount)
+        fajl.write(json.dumps(['Relation count:', relationCount]))
+        # fajl.close()
+        ws.send("Relation count:", a)
 
     # unknown message
     else:
         print("... Custom message: " + message)
-        nodeTypes.append(message)
-        ws.send(json.dumps(nodeTypes))
+        # nodeTypes.append(message)
+        # ws.send(json.dumps(nodeTypes))
         print("Sent in JSON: ")
         print(json.dumps(nodeTypes))
         ws.close()
@@ -126,8 +129,8 @@ def on_error(ws, error):
 def on_close(ws):
     print("### closed ###")
     fajl = open('data.json', 'a')
-    fajl.write(json.dumps(['Node Count:', nodeCount.count('1')]))
-    fajl.write(json.dumps(['Relation Count:', relationCount.count('2')]))
+    fajl.write(json.dumps(['Node Count:', nodeCount]))
+    fajl.write(json.dumps(['Relation Count:', relationCount]))
     fajl.write(json.dumps([nodeTypes]))
     fajl.write(json.dumps([relationTypes]))
     fajl.close()
