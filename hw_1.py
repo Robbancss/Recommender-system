@@ -95,7 +95,8 @@ def on_message(ws, message):
     elif message == "Get node count":
         print("..Sending Node Count")
         fajl = open('data.json', 'a')
-        fajl.write(json.dumps(['Node count:', len(nodeCount)]))
+        a = str(len(nodeCount))
+        fajl.write(json.dumps(['Node count:', a]))
         fajl.close()
         ws.send("Node count:", nodeCount)
 
@@ -103,7 +104,8 @@ def on_message(ws, message):
     elif message == "Get relation count":
         print("..Sending relation count")
         fajl = open('data.json', 'a')
-        fajl.write(json.dumps(['Relation count:', len(relationCount)]))
+        a = str(len(relationCount))
+        fajl.write(json.dumps(['Relation count:', a]))
         fajl.close()
         ws.send("Relation count:", relationCount)
 
