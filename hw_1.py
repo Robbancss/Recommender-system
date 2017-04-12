@@ -12,6 +12,8 @@ relationCount = 0
 def on_message(ws, message):
     print("Message: %s" % message)
 
+    global nodeCount
+    global relationCount
     # basic identification
     if message == "Author name":
         print("... Sending: " + message)
@@ -72,7 +74,10 @@ def on_message(ws, message):
         ws.send("Knowledge base has been created")
         print("Sent Knowledge base has been created")
 
-        
+    # elif message[:22] == "Select knowledge base:":
+    #     print("..Sending knowledge base")
+    #     ws.send("Knowledge base has been selected")
+    #     print("Sent Knowledge base has been selected")
 
     # Add node
     elif message[:9] == "Add node:":
@@ -80,9 +85,9 @@ def on_message(ws, message):
         newNode = message[9:]
         fajl = open('node_type.json', 'a')
         fajl.writelines(json.dumps(newNode))
-        # fajl.close()
         ws.send("Node added")
-        nodeCount.__add__(1)
+        nodeCount = nodeCount + 1
+        # fajl.close()
 
     # Add relation
     elif message[:13] == "Add relation:":
@@ -90,27 +95,27 @@ def on_message(ws, message):
         newRelation = message[13:]
         fajl = open('relation_type.json', 'a')
         fajl.write(json.dumps(newRelation))
-        # fajl.close()
         ws.send("Relation added")
-        relationCount.__add__(1)
+        relationCount = relationCount + 1
+        # fajl.close()
 
     # Get Node Count
     elif message == "Get node count":
         print("..Sending Node Count")
         fajl = open('data.json', 'a')
         a = str(nodeCount)
-        fajl.write(json.dumps(['Node count:', nodeCount]))
+        fajl.write(json.dumps(['Node count:', a]))
+        ws.send("Node count:"+a)
         # fajl.close()
-        ws.send("Node count:", a)
 
     # Get relation Count
     elif message == "Get relation count":
         print("..Sending relation count")
         fajl = open('data.json', 'a')
         a = str(relationCount)
-        fajl.write(json.dumps(['Relation count:', relationCount]))
+        fajl.write(json.dumps(['Relation count:', a]))
+        ws.send("Relation count:"+a)
         # fajl.close()
-        ws.send("Relation count:", a)
 
     # unknown message
     else:
@@ -141,7 +146,6 @@ if __name__ == "__main__":
     ws = websocket.WebSocketApp("ws://service.recommender-system.com/recsys2-course/engine",
                                 # ws =
                                 # websocket.WebSocketApp("ws://echo.websocket.org",
-
                                 on_message=on_message,
                                 on_error=on_error,
                                 on_close=on_close)
