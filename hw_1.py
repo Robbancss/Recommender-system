@@ -2,6 +2,7 @@ import json
 import _thread
 import websocket
 import re
+import pprint
 
 nodeTypes = []
 relationTypes = []
@@ -84,7 +85,7 @@ def on_message(ws, message):
         print("..Sending:", message)
         newNode = message[9:]
         fajl = open('node_type.json', 'a')
-        fajl.writelines(json.dumps(newNode))
+        fajl.writelines(json.dumps(newNode, separators=(',', ':'), indent=0))
         ws.send("Node added")
         nodeCount = nodeCount + 1
         # fajl.close()
@@ -94,7 +95,7 @@ def on_message(ws, message):
         print("..Sending:", message)
         newRelation = message[13:]
         fajl = open('relation_type.json', 'a')
-        fajl.write(json.dumps(newRelation))
+        fajl.writelines(json.dumps(newRelation, separators=(',', ':'), indent=0))
         ws.send("Relation added")
         relationCount = relationCount + 1
         # fajl.close()
