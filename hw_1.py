@@ -83,9 +83,9 @@ def on_message(ws, message):
     # Add node
     elif message[:9] == "Add node:":
         print("..Sending:", message)
-        newNode = message[9:]
+        newNode = str(message[9:])
         fajl = open('node_type.json', 'a')
-        fajl.writelines(json.dumps(newNode, separators=(',', ':'), indent=0))
+        fajl.writelines(newNode+"\n")
         ws.send("Node added")
         nodeCount = nodeCount + 1
         # fajl.close()
@@ -93,9 +93,9 @@ def on_message(ws, message):
     # Add relation
     elif message[:13] == "Add relation:":
         print("..Sending:", message)
-        newRelation = message[13:]
+        newRelation = str(message[13:])
         fajl = open('relation_type.json', 'a')
-        fajl.writelines(json.dumps(newRelation, separators=(',', ':'), indent=0))
+        fajl.print(newRelation)
         ws.send("Relation added")
         relationCount = relationCount + 1
         # fajl.close()
