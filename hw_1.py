@@ -9,6 +9,10 @@ relationTypes = []
 nodeCount = 0
 relationCount = 0
 
+def comunicate(serverMessage, answer):
+    print("SERVER:"+ serverMessage)
+    ws.send(answer)
+    print("ME:"+ answer)
 
 def on_message(ws, message):
     print("Message: %s" % message)
