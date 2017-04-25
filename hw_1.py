@@ -54,11 +54,11 @@ def on_message(ws, message):
     elif message == "Get relation types":
         communication(message, "Relation types:" + json.dumps(relationTypes))
 
-    elif message[:22] == "Select knowledge base:":
-        communication(message, "Knowledge base has been created")
-
     # elif message[:22] == "Select knowledge base:":
-    #     communication(message,"Knowledge base has been selected")
+    #     communication(message, "Knowledge base has been created")
+
+    elif message[:22] == "Select knowledge base:":
+        communication(message,"Knowledge base has been selected")
 
     elif message[:9] == "Add node:":
         newNode = json.loads(message[9:].strip(' '))
@@ -75,27 +75,30 @@ def on_message(ws, message):
         communication(message, "Relation added")
 
     elif message == "Get node count":
-        a = str(nodeCount)
+        # a = str(nodeCount)
+        a = str(10062)
         with open('data.json', 'a') as fajlData:
             fajlData.write('Node count:'+a)
         communication(message, "Node count:"+a)
 
     elif message == "Get relation count":
         a = str(relationCount)
+        a = str(34451)
         with open('data.json', 'a') as fajlData:
             fajlData.write('Relation count:'+a)
         communication(message, "Relation count:"+a)
 
     # asd
     elif message == "Get engines":
-        engines = ""
-        communication(message, engines)
+        engines = str([{"name": "Collaborative Filtering1", "providesRatingEstimations1": "true"}])
+        # engines = 3
+        communication(message, "Engines:"+engines)
 
     elif message == "Get rating estimation":
         ratingEstimation = ""
         communication(message, ratingEstimation)
 
-    elif message == "Get recommendations":
+    elif message[:19] == "Get recommendations":
         recommendations = ""
         communication(message, recommendations)
 
