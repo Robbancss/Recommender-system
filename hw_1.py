@@ -98,7 +98,10 @@ def on_message(ws, message):
         ratingEstimation = ""
         communication(message, ratingEstimation)
 
-    elif message[:19] == "Get recommendations":
+    elif message[:20] == "Get recommendations:":
+        newRecommendations = json.loads(message[20:].strip(' '))
+        with open('recommendations.json', 'a') as fajlRecommendations:
+            fajlRecommendations.write(json.dumps(newRecommendations)+"\n")
         recommendations = ""
         communication(message, recommendations)
 
