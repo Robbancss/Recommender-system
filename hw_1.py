@@ -1,5 +1,7 @@
 import json
+import io
 import websocket
+import codecs
 # import _thread
 # import re
 # import pprint
@@ -19,7 +21,8 @@ def communication(serverMessage, answer):
     print("ME: "+ answer)
 
 def on_message(ws, message):
-
+    # with open('server.json', 'a') as fajlServer:
+    #         fajlServer.write(json.dumps(message)+"\n")
     global nodeCount
     global relationCount
 
@@ -58,43 +61,43 @@ def on_message(ws, message):
     #     communication(message,"Knowledge base has been selected")
 
     elif message[:9] == "Add node:":
-        newNode = str(message[9:])
-        fajlNode = open('node_type.json', 'a')
-        fajlNode.writelines(newNode+"\n")
+        newNode = json.loads(message[9:].strip(' '))
+        with open('node_type.json', 'a') as fajlNode:
+            fajlNode.write(json.dumps(newNode)+"\n")
         nodeCount = nodeCount + 1
         communication(message, "Node added")
 
     elif message[:13] == "Add relation:":
-        newRelation = str(message[13:])
-        fajlRelation = open('relation_type.json', 'a')
-        fajlRelation.print(newRelation)
+        newRelation = json.loads(message[13:].strip(' '))
+        with open('relation_type.json', 'a') as fajlRelation:
+            fajlRelation.write(json.dumps(newRelation)+"\n")
         relationCount = relationCount + 1
         communication(message, "Relation added")
 
     elif message == "Get node count":
-        fajlData = open('data.json', 'a')
         a = str(nodeCount)
-        fajlData.write(['Node count:', a])
+        with open('data.json', 'a') as fajlData:
+            fajlData.write('Node count:'+a)
         communication(message, "Node count:"+a)
 
     elif message == "Get relation count":
-        fajlData = open('data.json', 'a')
         a = str(relationCount)
-        fajlData.write(['Relation count:', a])
+        with open('data.json', 'a') as fajlData:
+            fajlData.write('Relation count:'+a)
         communication(message, "Relation count:"+a)
 
     # asd
     elif message == "Get engines":
         engines = ""
-        communication(message,engines)
+        communication(message, engines)
 
     elif message == "Get rating estimation":
         ratingEstimation = ""
-        communication(message,ratingEstimation)
+        communication(message, ratingEstimation)
 
     elif message == "Get recommendations":
         recommendations = ""
-        communication(message,recommendations)
+        communication(message, recommendations)
 
 
     # unknown message
@@ -114,13 +117,13 @@ def on_error(ws, error):
 def on_close(ws):
     print("### closed ###")
     fajl = open('data.json', 'a')
-    
-    fajl.writelines(['Node Count: ', str(nodeCount)+"\n"])
+
+    fajl.writelines(['Node Count: '+str(nodeCount)+"\n"])
     fajl.writelines([str(nodeTypes)+"\n"])
 
-    fajl.writelines(['Relation Count: ', str(relationCount)+"\n"])
+    fajl.writelines(['Relation Count: '+str(relationCount)+"\n"])
     fajl.writelines([str(relationTypes)+"\n"])
-    
+
     fajl.close()
 
 
