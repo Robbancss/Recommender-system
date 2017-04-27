@@ -16,11 +16,11 @@ relationCount = 0
 # fajlData = open('data.json', 'a')
 
 def communication(serverMessage, answer):
-    print("SERVER: "+ serverMessage)
     ws.send(answer)
     print("ME: "+ answer)
 
 def on_message(ws, message):
+    print("SERVER: "+ message)
     # with open('server.json', 'a') as fajlServer:
     #         fajlServer.write(json.dumps(message)+"\n")
     global nodeCount
