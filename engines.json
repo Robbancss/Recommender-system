@@ -1,5 +1,5 @@
 [
-    {"name": "Collaborative Filtering", "providesRatingEstimations": "true"},
+    {"name": "Alternating Least Squares Method for Collaborative Filtering", "providesRatingEstimations": "true"},
     {"name": "Collaborative Filtering", "providesRatingEstimations": "true"},
     {"name": "Collaborative Filtering", "providesRatingEstimations": "true"}
 ]

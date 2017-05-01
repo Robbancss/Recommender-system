@@ -82,7 +82,7 @@ def on_message(ws, message):
         communication(message, "Node count:"+a)
 
     elif message == "Get relation count":
-        a = str(relationCount)
+        # a = str(relationCount)
         a = str(34451)
         with open('data.json', 'a') as fajlData:
             fajlData.write('Relation count:'+a)
@@ -90,7 +90,8 @@ def on_message(ws, message):
 
     # asd
     elif message == "Get engines":
-        engines = str([{"name": "Collaborative Filtering1", "providesRatingEstimations1": "true"}])
+        engines = str([{"name": "Alternating Least Squares Method for Collaborative Filtering",
+                        "providesRatingEstimations": "true"}])
         # engines = 3
         communication(message, "Engines:"+engines)
 
