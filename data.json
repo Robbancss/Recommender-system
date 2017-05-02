@@ -2,3 +2,6 @@ Node Count: 10062
 ['Item', 'Occupation', 'AgeCategory', 'ZipCodeRegion', 'Genre', 'Gender', 'YearOfPublishing', 'Person']
 Relation Count: 34451
 ['PersonAgeCategory', 'Rating', 'ItemGenre', 'PersonOccupation', 'ItemYearOfPublishing', 'PersonGender', 'PersonZipCodeRegion']
+Robi, auto, 2
+Isti, repulo, 3
+Dani, hajo, 1
