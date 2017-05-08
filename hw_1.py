@@ -11,7 +11,7 @@ relationTypes = []
 nodeCount = 0
 relationCount = 0
 
-# fajlNode = open('node_type.json', 'a')
+fajlServer = open('server.json', 'a')
 # fajlRelation = open('relation_type.json', 'a')
 # fajlData = open('data.json', 'a')
 
@@ -21,8 +21,8 @@ def communication(serverMessage, answer):
 
 def on_message(ws, message):
     print("SERVER: "+ message)
-    # with open('server.json', 'a') as fajlServer:
-    #         fajlServer.write(json.dumps(message)+"\n")
+    # ms = json.loads(message.strip(' '))
+    fajlServer.write(message+"\n")
     global nodeCount
     global relationCount
 
@@ -95,7 +95,7 @@ def on_message(ws, message):
         # engines = 3
         communication(message, "Engines:"+engines)
 
-    elif message == "Get rating estimation":
+    elif message[:21] == "Get rating estimation":
         ratingEstimation = ""
         communication(message, ratingEstimation)
 
