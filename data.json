@@ -2,7 +2,3 @@ Node Count: 10062
 ['Item', 'Occupation', 'AgeCategory', 'ZipCodeRegion', 'Genre', 'Gender', 'YearOfPublishing', 'Person']
 Relation Count: 34451
 ['PersonAgeCategory', 'Rating', 'ItemGenre', 'PersonOccupation', 'ItemYearOfPublishing', 'PersonGender', 'PersonZipCodeRegion']
-Node count:10062Relation count:34451Node Count: 0
-[]
-Relation Count: 10000
-[]

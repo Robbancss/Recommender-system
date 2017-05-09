@@ -6,6 +6,7 @@ import codecs
 # import re
 # import pprint
 
+
 nodeTypes = []
 relationTypes = []
 nodeCount = 0
