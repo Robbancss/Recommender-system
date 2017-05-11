@@ -14,7 +14,7 @@ from recsys.evaluation.ranking import SpearmanRho, KendallTau
 PERCENT_TRAIN = 70
 data = Data()
 data.load('./data/dataset-recsys.csv', sep=',', format={'col':0, 'row':1, 'value':2, 'ids':int})
- 
+
 #Train & Test data
 train, test = data.split_train_test(percent=PERCENT_TRAIN)
  

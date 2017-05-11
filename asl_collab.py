@@ -51,8 +51,8 @@ for ii in range(n_iterations):
 Q_hat = np.dot(X, Y)
 print('Error of rated movies: {}'.format(get_error(Q, X, Y, W)))
 
-plt.plot(errors);
-plt.ylim([0, 20000]);
+plt.plot(errors)
+plt.ylim([0, 20000])
 
 def print_recommendations(W=W, Q=Q, Q_hat=Q_hat, movie_titles=movie_titles):
     #Q_hat -= np.min(Q_hat)

@@ -94,9 +94,7 @@ with open('server.json', 'r') as server:
                     with open('recommendations.json', 'a') as fajlRecommendations:
                         fajlRecommendations.write(json.dumps(newRecommendations)+"\n")
                     #
-                    person = newRecommendations.get("personId")
-                    count = newRecommendations.get("count")
-                    with open.. 
+                    
                     #
                     recommendations = ""
                     communication(message, recommendations)
