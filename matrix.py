@@ -27,5 +27,5 @@ with open('node_type.json', mode='r') as itemsfile:
 print(itemLen)
 print(userLen)
 
-y = np.zeros(shape=(3, 4))
-print(y.shape)
+y = np.ndarray(shape=(6000, 4000))
+print(y)
